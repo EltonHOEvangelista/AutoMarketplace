@@ -1,9 +1,14 @@
 {
+  "name": "auto-mp",
+  "version": "1.0.0",
+  "private": true,
   "scripts": {
-    "start": "concurrently \"npm run start --prefix server\" \"npm run dev --prefix auto-mp-client\""
-  },
-
-  "devDependencies": {
-    "concurrently": "^8.2.2"
+    "install-client": "cd auto-mp-client && npm install",
+    "install-server": "cd server && npm install",
+    "install": "npm run install-client && npm run install-server",
+    "build-client": "cd auto-mp-client && npm run build",
+    "build-server": "cd server && npm run build",
+    "build": "npm run build-client && npm run build-server",
+    "start": "cd server && npm start"
   }
 }
