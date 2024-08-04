@@ -13,10 +13,16 @@
       "use": "@vercel/node"
     }
   ],
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/server/$1"
+    }
+  ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/server/server.js"
+      "dest": "/server/$1"
     },
     {
       "src": "/(.*)",
