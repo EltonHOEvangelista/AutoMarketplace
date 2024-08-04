@@ -57,7 +57,7 @@ const Bid = () => {
         bidTime: new Date()
       };
       
-      axios.put(`${import.meta.env.VITE_API_BASE_URL}/bid/${vin}`, newBid)
+      axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/bid/${vin}`, newBid)
         .then(response => {
           console.log('Bid placed:', response.data);
           setBid({
