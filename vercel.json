@@ -1,23 +1,27 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "server/server.js",
-        "use": "@vercel/node"
-      },
-      {
-        "src": "auto-mp-client/dist/**/*",
-        "use": "@vercel/static"
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/server.js",
+      "use": "@vercel/node"
+    },
+    {
+      "src": "auto-mp-client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "auto-mp-client/dist"
       }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/server/server.js"
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/auto-mp-client/dist/$1"
-      }
-    ]
-  }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/auto-mp-client/dist/$1"
+    }
+  ]
+}
+  
