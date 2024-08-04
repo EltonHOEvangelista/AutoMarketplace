@@ -12,7 +12,8 @@ const Bid = () => {
 
     const [bid, setBid] = useState({
       bidPrice: '',
-      bidTime: ''
+      bidTime: '',
+      bidderName: ''
     });
 
     const [bids, setBids] = useState([]);
@@ -54,15 +55,19 @@ const Bid = () => {
       
       const newBid = {
         bidPrice: bid.bidPrice,
-        bidTime: new Date()
+        bidTime: new Date(),
+        bidderName: bid.bidderName
       };
+
+      // console.log("Submitting new bid:", newBid);
       
       axios.put(`${import.meta.env.VITE_API_BASE_URL}/api/bid/${vin}`, newBid)
         .then(response => {
           console.log('Bid placed:', response.data);
           setBid({
             bidPrice: '',
-            bidTime: ''
+            bidTime: '',
+            bidderName: ''
           });
           setBids(prevBids => [...prevBids, newBid]);
         })
@@ -120,7 +125,7 @@ const Bid = () => {
               </div>
               <div className='column'>
                 <div className='inner-div'>
-                  <h1>Bid</h1>
+                  <h2>Bid</h2>
                   <p>Submit your top bid</p>
                   <form onSubmit={handleSubmit}>
                     <label htmlFor="currentBid">Best Bid</label>
@@ -128,6 +133,10 @@ const Bid = () => {
 
                     <label htmlFor="bidPrice">Your Bid</label>
                     <input type="number" name="bidPrice" id="bidPrice" value={bid.bidPrice} onChange={handleChange}/>
+
+                    {/* Add name */}
+                    <label htmlFor="bidderName">Your Name</label>
+                    <input type="text" name="bidderName" id="bidderName" value={bid.bidderName} onChange={handleChange}/>
                     
                     <button type="submit" name="placeBid" id="placeBid">Bid</button>
                   </form>
@@ -142,7 +151,9 @@ const Bid = () => {
                         <p className={`font-bold ${index === 0 ? 'text-green-600 text-2xl' : 'text-red-500 text-xl'}`}>
                           {`Bid ${index + 1}: $${bid.bidPrice.toLocaleString()}`}
                         </p> {/* Conditionally styled bid price */}
-                        <p className="text-sm text-gray-500">{`at ${new Date(bid.bidTime).toLocaleString()}`}</p>
+                        <p className="text-sm text-gray-500">
+                          <span className='font-bold text-lg'>{`by ${bid.bidderName}`}</span>{` at ${new Date(bid.bidTime).toLocaleString()}`}
+                          </p>
                       </div>
                     ))}
                   </div>
