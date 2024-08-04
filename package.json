@@ -9,6 +9,11 @@
     "build-client": "cd auto-mp-client && npm run build",
     "build-server": "cd server && npm run build",
     "build": "npm run build-client && npm run build-server",
-    "start": "cd server && npm start"
+    "start-client": "cd auto-mp-client && npm start",
+    "start-server": "cd server && npm start",
+    "start": "concurrently \"npm run start-server\" \"npm run start-client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }
