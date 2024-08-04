@@ -15,7 +15,7 @@ const Home = () => {
     };
 
     useEffect(() => {
-        axios.get(`${import.meta.env.VITE_API_LOCAL_URL}/api`)    
+        axios.get(`${import.meta.env.VITE_API_BASE_URL}/api`)    
             .then(response => setVehicles(response.data))
             .catch(error => console.error('Error fetching data:', error));
     }, []);
