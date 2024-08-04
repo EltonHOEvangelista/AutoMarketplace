@@ -18,9 +18,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.json());
 
-// Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../auto-mp-client/dist')));
-
 // Use the environment variables
 const port = process.env.PORT || 5000;
 const mongoUri = process.env.DB_URI;
@@ -67,11 +64,6 @@ const vehiclesSchema = new Schema({
 });
 
 const VehicleModel = mongoose.model("Vehicle", vehiclesSchema);
-
-// Serve the React app for any non-API route
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../auto-mp-client/dist', 'index.html'));
-});
 
 //Set router
 const router = express.Router();
@@ -135,3 +127,11 @@ router.route("/bid/:vin")
             })
             .catch((err) => res.status(400).json("Error: " + err));
     });
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../auto-mp-client/dist')));
+
+// Wildcard route to serve the React app
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../auto-mp-client/dist', 'index.html'));
+});

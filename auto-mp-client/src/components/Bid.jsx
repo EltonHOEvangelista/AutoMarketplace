@@ -21,7 +21,7 @@ const Bid = () => {
     const [highestBid, setHighestBid] = useState(0);
 
     useEffect(() => {
-      axios.get('https://auto-marketplace.vercel.app:5000/api/bid/${vin}')   //`${import.meta.env.VITE_API_BASE_URL}/api/bid/${vin}`
+      axios.get(`${import.meta.env.VITE_API_BASE_URL}/api/bid/${vin}`) 
           .then(response => {
             setVehicle(response.data);
             setBids(response.data.bids || []);

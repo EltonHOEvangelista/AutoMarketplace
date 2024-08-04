@@ -48,7 +48,7 @@ const AddVehicle = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    axios.post('https://auto-marketplace.vercel.app:5000/api/addvehicle', vehicle)    //  `${import.meta.env.VITE_API_BASE_URL}/api/addvehicle`
+    axios.post(`${import.meta.env.VITE_API_BASE_URL}/api/addvehicle`, vehicle)
       .then(response => {
         console.log('Vehicle added:', response.data);
         setVehicle({
