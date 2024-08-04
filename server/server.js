@@ -40,7 +40,8 @@ const Schema = mongoose.Schema;
 //Bid schema. Sub-item of vehicle schema
 const bidSchema = new Schema({
     bidPrice: { type: Number, required: true },
-    bidTime: { type: Date, default: Date.now }
+    bidTime: { type: Date, default: Date.now },
+    bidderName: { type: String, required: true, default: 'Anonymous' }
 });
 
 // Create a Schema object
@@ -103,6 +104,7 @@ router.route("/bid/:vin")
             .catch((err) => res.status(400).json("Error: " + err));
     })
     .put((req, res) => {
+        console.log("Received bid data:", req.body);
         VehicleModel.findOne({ vin: req.params.vin })
             .then((vehicle) => {
                 if (!vehicle) {
@@ -112,9 +114,11 @@ router.route("/bid/:vin")
                 // Create a new bid object
                 const newBid = {
                     bidPrice: req.body.bidPrice,
-                    bidTime: req.body.bidTime
+                    bidTime: req.body.bidTime,
+                    bidderName: req.body.bidderName
                 };
 
+                console.log("Saving new bid:", newBid);
                 // Add the new bid to the bids array
                 vehicle.bids.push(newBid);
 
@@ -126,6 +130,40 @@ router.route("/bid/:vin")
             })
             .catch((err) => res.status(400).json("Error: " + err));
     });
+
+
+// router.route("/bid/:vin")
+//     .get((req, res) => {
+//         VehicleModel.findOne({ vin: req.params.vin })
+//             .then((vehicle) => res.json(vehicle))
+//             .catch((err) => res.status(400).json("Error: " + err));
+//     })
+//     .put((req, res) => {
+//         VehicleModel.findOne({ vin: req.params.vin })
+//             .then((vehicle) => {
+//                 if (!vehicle) {
+//                     return res.status(404).json("Vehicle not found");
+//                 }
+                
+//                 // Create a new bid object
+//                 const newBid = {
+//                     bidPrice: req.body.bidPrice,
+//                     bidTime: req.body.bidTime,
+//                     bidderName: req.body.bidderName
+//                 };
+
+//                 // Add the new bid to the bids array
+//                 vehicle.bids.push(newBid);
+
+//                 // Save the vehicle with the new bid
+//                 vehicle
+//                     .save()
+//                     .then(() => res.status(201).json("Bid placed!"))
+//                     .catch((err) => res.status(400).json("Error: " + err));
+//             })
+//             .catch((err) => res.status(400).json("Error: " + err));
+//     });
+
 
 // Serve static files from the React app
 // app.use(express.static(path.join(__dirname, '../auto-mp-client/dist')));
