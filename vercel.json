@@ -17,17 +17,12 @@
     {
       "source": "/api/(.*)",
       "destination": "/server/$1"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "/server/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "/auto-mp-client/dist/$1"
+      "source": "/(.*)",
+      "destination": "/auto-mp-client/dist/$1"
     }
   ]
 }
+
   
