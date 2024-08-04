@@ -9,7 +9,7 @@
       "src": "auto-mp-client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "auto-mp-client/dist"
+        "distDir": "dist"
       }
     }
   ],
