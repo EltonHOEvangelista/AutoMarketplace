@@ -5,24 +5,30 @@
       "src": "auto-mp-client/package.json",
       "use": "@vercel/static-build",
       "config": {
-        "distDir": "dist"
+        "distDir": "auto-mp-client/dist"
       }
     },
     {
-      "src": "server/server.js",
-      "use": "@vercel/node"
+      "src": "server/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": [
+          "server/**/*"
+        ]
+      }
     }
   ],
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/(.*)",
-      "destination": "/server/$1"
+      "src": "/api/(.*)",
+      "dest": "/api/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/auto-mp-client/dist/$1"
+      "src": "/(.*)",
+      "dest": "/auto-mp-client/dist/$1"
     }
   ]
 }
+
 
   
