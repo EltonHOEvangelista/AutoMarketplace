@@ -128,9 +128,9 @@ router.route("/bid/:vin")
     });
 
 // Serve static files from the React app
-app.use(express.static(path.join(__dirname, '../auto-mp-client/dist')));
+// app.use(express.static(path.join(__dirname, '../auto-mp-client/dist')));
 
-// Wildcard route to serve the React app
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../auto-mp-client/dist', 'index.html'));
-});
+// // Wildcard route to serve the React app
+// app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../auto-mp-client/dist', 'index.html'));
+// });
