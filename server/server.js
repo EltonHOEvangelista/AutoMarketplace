@@ -1,5 +1,6 @@
 //server.js
 const dotenv = require('dotenv');
+dotenv.config(); // Load environment variables
 
 // importing packages
 const express = require('express');
@@ -8,8 +9,6 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const path = require('path');
-
-dotenv.config(); // Load environment variables
 
 // setups
 const app = express();
