@@ -9,24 +9,20 @@
       }
     },
     {
-      "src": "server/package.json",
-      "use": "@vercel/node",
-      "config": {
-        "includeFiles": [
-          "server/**/*"
-        ]
-      }
+      "src": "server/server.js",
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/api/(.*)",
-      "dest": "/api/$1"
+      "dest": "/server/server.js"
     },
     {
       "src": "/(.*)",
-      "dest": "/auto-mp-client/dist/$1"
+      "dest": "/auto-mp-client/dist/index.html"
     }
   ]
 }
+
   
